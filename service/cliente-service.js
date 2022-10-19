@@ -23,8 +23,30 @@ const deletaCliente = (id) => {
   })
 }
 
+const detalhaCLiente = async (id) => {
+  const resposta = await fetch(`http://localhost:3000/profile/${id}`)
+  return await resposta.json()
+}
+
+const atualizaCleinte = async (id, nome, email) => {
+  const resposta = await fetch(`http://localhost:3000/profile/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nome: nome,
+      email: email
+    })
+  })
+  
+  return await resposta.json()
+}
+
 export const clienteService = {
   listaClientes,
   criaCliente,
-  deletaCliente
+  deletaCliente,
+  detalhaCLiente,
+  atualizaCleinte
 }
